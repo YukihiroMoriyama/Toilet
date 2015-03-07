@@ -4,8 +4,6 @@
 <dict>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Use CoreLocation!</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>When in use</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
