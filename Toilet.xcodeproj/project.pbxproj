@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E22916DF1AAC0A3500AF86A3 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22916DE1AAC0A3500AF86A3 /* SwiftyJSON.swift */; };
+		E22916E11AAC11A700AF86A3 /* toilet_osaka.json in Resources */ = {isa = PBXBuildFile; fileRef = E22916E01AAC11A700AF86A3 /* toilet_osaka.json */; };
+		E22916E31AAC2A2D00AF86A3 /* toilet-mini.png in Resources */ = {isa = PBXBuildFile; fileRef = E22916E21AAC2A2D00AF86A3 /* toilet-mini.png */; };
+		E22916E51AAC2AC300AF86A3 /* gaman-mini.png in Resources */ = {isa = PBXBuildFile; fileRef = E22916E41AAC2AC300AF86A3 /* gaman-mini.png */; };
 		E276C1F91AA949BA00407CE5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E276C1F81AA949BA00407CE5 /* AppDelegate.swift */; };
 		E276C1FB1AA949BA00407CE5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E276C1FA1AA949BA00407CE5 /* ViewController.swift */; };
 		E276C1FE1AA949BA00407CE5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E276C1FC1AA949BA00407CE5 /* Main.storyboard */; };
@@ -40,6 +44,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E22916DE1AAC0A3500AF86A3 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		E22916E01AAC11A700AF86A3 /* toilet_osaka.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = toilet_osaka.json; sourceTree = "<group>"; };
+		E22916E21AAC2A2D00AF86A3 /* toilet-mini.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toilet-mini.png"; sourceTree = "<group>"; };
+		E22916E41AAC2AC300AF86A3 /* gaman-mini.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gaman-mini.png"; sourceTree = "<group>"; };
 		E276C1F31AA949BA00407CE5 /* Toilet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Toilet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E276C1F71AA949BA00407CE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E276C1F81AA949BA00407CE5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +109,8 @@
 		E276C1EA1AA949BA00407CE5 = {
 			isa = PBXGroup;
 			children = (
+				E22916E41AAC2AC300AF86A3 /* gaman-mini.png */,
+				E22916E21AAC2A2D00AF86A3 /* toilet-mini.png */,
 				E276C2321AA94BB200407CE5 /* AVFoundation.framework */,
 				E276C2301AA94BAB00407CE5 /* CoreData.framework */,
 				E276C22E1AA94BA400407CE5 /* CoreLocation.framework */,
@@ -133,6 +143,8 @@
 		E276C1F51AA949BA00407CE5 /* Toilet */ = {
 			isa = PBXGroup;
 			children = (
+				E22916E01AAC11A700AF86A3 /* toilet_osaka.json */,
+				E22916DE1AAC0A3500AF86A3 /* SwiftyJSON.swift */,
 				E276C2371AA94F8700407CE5 /* Toilet-Bridging-Header.h */,
 				E276C1F81AA949BA00407CE5 /* AppDelegate.swift */,
 				E276C1FA1AA949BA00407CE5 /* ViewController.swift */,
@@ -250,9 +262,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				E276C1FE1AA949BA00407CE5 /* Main.storyboard in Resources */,
+				E22916E11AAC11A700AF86A3 /* toilet_osaka.json in Resources */,
 				E276C2031AA949BA00407CE5 /* LaunchScreen.xib in Resources */,
+				E22916E51AAC2AC300AF86A3 /* gaman-mini.png in Resources */,
 				E276C2001AA949BA00407CE5 /* Images.xcassets in Resources */,
 				E276C21B1AA94B5000407CE5 /* GoogleMaps.bundle in Resources */,
+				E22916E31AAC2A2D00AF86A3 /* toilet-mini.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E22916DF1AAC0A3500AF86A3 /* SwiftyJSON.swift in Sources */,
 				E276C1FB1AA949BA00407CE5 /* ViewController.swift in Sources */,
 				E276C1F91AA949BA00407CE5 /* AppDelegate.swift in Sources */,
 			);
@@ -475,6 +491,7 @@
 				E276C2141AA949BB00407CE5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E276C2151AA949BB00407CE5 /* Build configuration list for PBXNativeTarget "ToiletTests" */ = {
 			isa = XCConfigurationList;
@@ -483,6 +500,7 @@
 				E276C2171AA949BB00407CE5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
