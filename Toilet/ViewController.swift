@@ -38,13 +38,13 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         gmaps.myLocationEnabled = true
         gmaps.delegate = self
         
-//        var now :GMSCameraPosition = GMSCameraPosition.cameraWithLatitude(
-//            34.686316,
-//            longitude: 135.519711,
-//            zoom: 17
-//        )
-//        
-//        gmaps.camera = now
+        var now :GMSCameraPosition = GMSCameraPosition.cameraWithLatitude(
+            34.686316,
+            longitude: 135.519711,
+            zoom: 16
+        )
+        
+        gmaps.camera = now
         
         self.view.addSubview(gmaps)
     }
