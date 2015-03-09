@@ -38,13 +38,13 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         gmaps.myLocationEnabled = true
         gmaps.delegate = self
         
-        var now :GMSCameraPosition = GMSCameraPosition.cameraWithLatitude(
-            34.686316,
-            longitude: 135.519711,
-            zoom: 10
-        )
-        
-        gmaps.camera = now
+//        var now :GMSCameraPosition = GMSCameraPosition.cameraWithLatitude(
+//            34.686316,
+//            longitude: 135.519711,
+//            zoom: 17
+//        )
+//        
+//        gmaps.camera = now
         
         self.view.addSubview(gmaps)
     }
@@ -96,6 +96,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     
     /* 位置情報の取得成功時 */
     func locationManager(manager: CLLocationManager!, didUpdateToLocation newLocation: CLLocation!, fromLocation oldLocation: CLLocation!){
+        println("test")
         
         /* 現在位置を地図上に表示 */
         var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(
