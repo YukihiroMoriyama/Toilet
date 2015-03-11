@@ -31,6 +31,8 @@
 		E276C22F1AA94BA400407CE5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E276C22E1AA94BA400407CE5 /* CoreLocation.framework */; };
 		E276C2311AA94BAB00407CE5 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E276C2301AA94BAB00407CE5 /* CoreData.framework */; };
 		E276C2331AA94BB200407CE5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E276C2321AA94BB200407CE5 /* AVFoundation.framework */; };
+		E2BAB0F61AB030A700BA637B /* toilet_benki.png in Resources */ = {isa = PBXBuildFile; fileRef = E2BAB0F51AB030A700BA637B /* toilet_benki.png */; };
+		E2BAB0F81AB0508000BA637B /* se_maoudamashii_toire.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E2BAB0F71AB0508000BA637B /* se_maoudamashii_toire.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +75,8 @@
 		E276C2301AA94BAB00407CE5 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E276C2321AA94BB200407CE5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E276C2371AA94F8700407CE5 /* Toilet-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Toilet-Bridging-Header.h"; sourceTree = "<group>"; };
+		E2BAB0F51AB030A700BA637B /* toilet_benki.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toilet_benki.png; sourceTree = "<group>"; };
+		E2BAB0F71AB0508000BA637B /* se_maoudamashii_toire.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = se_maoudamashii_toire.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,8 @@
 		E276C1EA1AA949BA00407CE5 = {
 			isa = PBXGroup;
 			children = (
+				E2BAB0F71AB0508000BA637B /* se_maoudamashii_toire.mp3 */,
+				E2BAB0F51AB030A700BA637B /* toilet_benki.png */,
 				E22916E41AAC2AC300AF86A3 /* gaman-mini.png */,
 				E22916E21AAC2A2D00AF86A3 /* toilet-mini.png */,
 				E276C2321AA94BB200407CE5 /* AVFoundation.framework */,
@@ -265,7 +271,9 @@
 				E22916E11AAC11A700AF86A3 /* toilet_osaka.json in Resources */,
 				E276C2031AA949BA00407CE5 /* LaunchScreen.xib in Resources */,
 				E22916E51AAC2AC300AF86A3 /* gaman-mini.png in Resources */,
+				E2BAB0F61AB030A700BA637B /* toilet_benki.png in Resources */,
 				E276C2001AA949BA00407CE5 /* Images.xcassets in Resources */,
+				E2BAB0F81AB0508000BA637B /* se_maoudamashii_toire.mp3 in Resources */,
 				E276C21B1AA94B5000407CE5 /* GoogleMaps.bundle in Resources */,
 				E22916E31AAC2A2D00AF86A3 /* toilet-mini.png in Resources */,
 			);
