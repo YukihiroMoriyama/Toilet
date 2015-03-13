@@ -61,6 +61,9 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     
     /* トイレをマッピングする */
     func drawToiletOnMaps(now: CLLocation) {
+        var minKey: String = "0"
+        var min: Double = 600.0
+
         for (key: String, subJSON: JSON) in toiletData {
             var location: [Double]!
             
@@ -69,27 +72,56 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
             let name = subJSON["facility"].string
             
             switch (latStr, longStr, name) {
-            case (.Some(let la), .Some(let lo), .Some(let n)):
+                case (.Some(let la), .Some(let lo), .Some(let n)):
+                    let lat = ((la as NSString).doubleValue)
+                    let lon = ((lo as NSString).doubleValue)
+                
+                    let toToilet: CLLocation = CLLocation(latitude: lat, longitude: lon)
+                    let distance = toToilet.distanceFromLocation(now)
+                
+                    if distance < 500 {
+                        createMarker(lat, longitude: lon, name: n)
+                    
+                        if(distance < min) {
+                            min = distance
+                            minKey = key
+                        }
+                    }
+                
+                    break
+                default:
+                    println("error")
+            }
+        }
+        
+        /* 現在位置から1番近いトイレに線を引く */
+        let nearLat = toiletData[minKey.toInt()!]["latitude"].string
+        let nearLong = toiletData[minKey.toInt()!]["longitude"].string
+        
+        switch (nearLat, nearLong) {
+            case (.Some(let la), .Some(let lo)):
                 let lat = ((la as NSString).doubleValue)
                 let lon = ((lo as NSString).doubleValue)
                 
-                let toToilet: CLLocation = CLLocation(latitude: lat, longitude: lon)
-                let distance = toToilet.distanceFromLocation(now)
-                println(distance)
-                println(distance < 500)
+                let nearToilet: CLLocation = CLLocation(latitude: lat, longitude: lon)
                 
-                if distance < 500 {
-                    createMarker(lat, longitude: lon, name: n)
-                } else {
-                    println("not marker")
-                }
-                
-                break
+                drawToiletPath(now, toilet: nearToilet)
+                break;
             default:
-                println("error")
-            }
-            
+                break;
         }
+    }
+    
+    /* １番近いトイレまで線を引く */
+    func drawToiletPath(now: CLLocation, toilet: CLLocation) {
+        var path = GMSMutablePath()
+        path.addLatitude(now.coordinate.latitude, longitude:now.coordinate.longitude) // 現在位置
+        path.addLatitude(toilet.coordinate.latitude, longitude:toilet.coordinate.longitude) // 1番近いトイレ
+        
+        var polyline = GMSPolyline(path: path)
+        polyline.strokeColor = UIColor.blueColor()
+        polyline.strokeWidth = 3.0
+        polyline.map = gmaps
     }
     
     /* マーカー作成 */
