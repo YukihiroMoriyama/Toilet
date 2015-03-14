@@ -23,10 +23,10 @@
             </objects>
             <point key="canvasLocation" x="507.5" y="98.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Top View-->
         <scene sceneID="A2B-xZ-Iy5">
             <objects>
-                <viewController id="jGe-PN-Xvf" sceneMemberID="viewController">
+                <viewController id="jGe-PN-Xvf" customClass="TopView" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RI1-5x-VDo"/>
                         <viewControllerLayoutGuide type="bottom" id="fGW-bs-51b"/>

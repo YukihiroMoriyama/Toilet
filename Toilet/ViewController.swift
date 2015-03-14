@@ -27,6 +27,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         toiletData = getToiletData()
         
         drawGoogleMaps()
+        drawToiletOnMaps()
         settingCurrentLocation()
     }
 
@@ -60,10 +61,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     }
     
     /* トイレをマッピングする */
-    func drawToiletOnMaps(now: CLLocation) {
-        var minKey: String = "0"
-        var min: Double = 600.0
-
+    func drawToiletOnMaps() {
         for (key: String, subJSON: JSON) in toiletData {
             var location: [Double]!
             
@@ -72,25 +70,101 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
             let name = subJSON["facility"].string
             
             switch (latStr, longStr, name) {
-                case (.Some(let la), .Some(let lo), .Some(let n)):
-                    let lat = ((la as NSString).doubleValue)
-                    let lon = ((lo as NSString).doubleValue)
+            case (.Some(let la), .Some(let lo), .Some(let n)):
+                let lat = ((la as NSString).doubleValue)
+                let lon = ((lo as NSString).doubleValue)
                 
-                    let toToilet: CLLocation = CLLocation(latitude: lat, longitude: lon)
-                    let distance = toToilet.distanceFromLocation(now)
+                createMarker(lat, longitude: lon, name: n)
                 
-                    if distance < 500 {
-                        createMarker(lat, longitude: lon, name: n)
-                    
-                        if(distance < min) {
-                            min = distance
-                            minKey = key
-                        }
-                    }
+                break
+            default:
+                println("error")
+            }
+        }
+    }
+    
+    /* トイレをマッピングする */
+//    func drawToiletOnMaps(now: CLLocation) {
+//        var minKey: String = "0"
+//        var min: Double = 600.0
+//
+//        for (key: String, subJSON: JSON) in toiletData {
+//            var location: [Double]!
+//            
+//            let latStr = subJSON["latitude"].string
+//            let longStr = subJSON["longitude"].string
+//            let name = subJSON["facility"].string
+//            
+//            switch (latStr, longStr, name) {
+//                case (.Some(let la), .Some(let lo), .Some(let n)):
+//                    let lat = ((la as NSString).doubleValue)
+//                    let lon = ((lo as NSString).doubleValue)
+//                
+//                    let toToilet: CLLocation = CLLocation(latitude: lat, longitude: lon)
+//                    let distance = toToilet.distanceFromLocation(now)
+//                
+//                    if distance < 500 {
+//                        createMarker(lat, longitude: lon, name: n)
+//                    
+//                        if(distance < min) {
+//                            min = distance
+//                            minKey = key
+//                        }
+//                    }
+//                
+//                    break
+//                default:
+//                    println("error")
+//            }
+//        }
+//        
+//        /* 現在位置から1番近いトイレに線を引く */
+//        let nearLat = toiletData[minKey.toInt()!]["latitude"].string
+//        let nearLong = toiletData[minKey.toInt()!]["longitude"].string
+//        
+//        switch (nearLat, nearLong) {
+//            case (.Some(let la), .Some(let lo)):
+//                let lat = ((la as NSString).doubleValue)
+//                let lon = ((lo as NSString).doubleValue)
+//                
+//                let nearToilet: CLLocation = CLLocation(latitude: lat, longitude: lon)
+//            
+//                drawToiletPath(now, toilet: nearToilet)
+//                
+//                break;
+//            default:
+//                break;
+//        }
+//    }
+    
+    /* 1番近いトイレを算出 */
+    func searchNearstToilet(now: CLLocation) {
+        var minKey: String = "0"
+        var min: Double = 600.0
+        
+        for (key: String, subJSON: JSON) in toiletData {
+            var location: [Double]!
+            
+            let latStr = subJSON["latitude"].string
+            let longStr = subJSON["longitude"].string
+            let name = subJSON["facility"].string
+            
+            switch (latStr, longStr, name) {
+            case (.Some(let la), .Some(let lo), .Some(let n)):
+                let lat = ((la as NSString).doubleValue)
+                let lon = ((lo as NSString).doubleValue)
                 
-                    break
-                default:
-                    println("error")
+                let toToilet: CLLocation = CLLocation(latitude: lat, longitude: lon)
+                let distance = toToilet.distanceFromLocation(now)
+                
+                if(distance < min) {
+                    min = distance
+                    minKey = key
+                }
+
+                break
+            default:
+                println("error")
             }
         }
         
@@ -99,26 +173,33 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         let nearLong = toiletData[minKey.toInt()!]["longitude"].string
         
         switch (nearLat, nearLong) {
-            case (.Some(let la), .Some(let lo)):
-                let lat = ((la as NSString).doubleValue)
-                let lon = ((lo as NSString).doubleValue)
-                
-                let nearToilet: CLLocation = CLLocation(latitude: lat, longitude: lon)
-                
-                drawToiletPath(now, toilet: nearToilet)
-                break;
-            default:
-                break;
+        case (.Some(let la), .Some(let lo)):
+            let lat = ((la as NSString).doubleValue)
+            let lon = ((lo as NSString).doubleValue)
+            
+            let nearToilet: CLLocation = CLLocation(latitude: lat, longitude: lon)
+            
+            drawToiletPath(now, toilet: nearToilet)
+            
+            break;
+        default:
+            break;
         }
     }
+    
+    var polyline: GMSPolyline! = GMSPolyline()
     
     /* １番近いトイレまで線を引く */
     func drawToiletPath(now: CLLocation, toilet: CLLocation) {
         var path = GMSMutablePath()
         path.addLatitude(now.coordinate.latitude, longitude:now.coordinate.longitude) // 現在位置
         path.addLatitude(toilet.coordinate.latitude, longitude:toilet.coordinate.longitude) // 1番近いトイレ
+
+        println(toilet.coordinate.latitude)
+        println(toilet.coordinate.longitude)
         
-        var polyline = GMSPolyline(path: path)
+        polyline.map = nil
+        polyline.path = path
         polyline.strokeColor = UIColor.blueColor()
         polyline.strokeWidth = 3.0
         polyline.map = gmaps
@@ -144,13 +225,13 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         lm.delegate = self
         lm.requestAlwaysAuthorization()
         lm.desiredAccuracy = kCLLocationAccuracyBest
-        lm.distanceFilter = 300
+//        lm.distanceFilter = 50
         lm.startUpdatingLocation()
     }
     
     /* 位置情報の取得成功時 */
     func locationManager(manager: CLLocationManager!, didUpdateToLocation newLocation: CLLocation!, fromLocation oldLocation: CLLocation!){
-        
+
         /* 現在位置を地図上に表示 */
         var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(
             latitude: newLocation.coordinate.latitude,
@@ -164,34 +245,10 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         )
         
         gmaps.camera = now
-        gmaps.clear()
         
-        drawToiletOnMaps(newLocation)
+//        drawToiletOnMaps(newLocation)
+        searchNearstToilet(newLocation)
         
-//        for (key: String, subJSON: JSON) in toiletData {
-//            let latStr = subJSON["latitude"].string
-//            let longStr = subJSON["longitude"].string
-//            
-//            switch (latStr, longStr) {
-//            case (.Some(let la), .Some(let lo)):
-//                let lat = ((la as NSString).doubleValue)
-//                let lon = ((lo as NSString).doubleValue)
-//                let toToilet: CLLocation = CLLocation(latitude: lat, longitude: lon)
-//                let distance = toToilet.distanceFromLocation(newLocation)
-//                println(distance)
-//                break
-//            default:
-//                println("error")
-//            }
-//            
-//        }
-        
-        /* 現在位置にマッピング */
-//        let marker: GMSMarker = GMSMarker ()
-//        marker.position = now.target
-//        marker.snippet = "現在位置だよー"
-//        marker.appearAnimation = kGMSMarkerAnimationPop;
-//        marker.map = gmaps;
     }
 
     /* 位置情報の取得失敗時 */
